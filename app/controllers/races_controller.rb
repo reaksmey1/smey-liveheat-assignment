@@ -10,9 +10,10 @@ class RacesController < ApplicationController
     def create
         @race = Race.new(race_params)
         if @race.save
-        redirect_to @race
+            redirect_to @race, notice: "New race created successfully."
         else
-        render :new
+            flash[:alert] = "Failed created race"
+            redirect_to new_race_path
         end
     end
   
