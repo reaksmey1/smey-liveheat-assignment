@@ -20,7 +20,7 @@
             <%= form.label :lane_number, "Lane Number" %>
             <%= form.number_field :lane_number, min: 1, max: @race.number_of_lanes, class: "form-control" %>
             </div>
-        
+            <br />
             <div class="form-group">
             <%= form.submit "Assign Student to Lane", class: "btn btn-primary" %>
             </div>
