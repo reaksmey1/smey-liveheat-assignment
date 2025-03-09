@@ -11,8 +11,26 @@
             <h5 class="card-title">Race <%= index + 1 %>: <%= race.name %></h5>
             <p class="card-text"><strong>Number of Lanes:</strong> <%= race.number_of_lanes %></p>
 
-            <%= link_to 'Assign Student', race_path(race), class: 'btn btn-info' %>
-            <%= link_to 'Set Ranking', set_ranking_race_path(race), class: 'btn btn-info' %>
+            <%= link_to 'Assign Student', race_path(race), class: 'btn btn-primary' %>
+            <% if race.lanes.count > 0 %>
+                <%= link_to 'Set Ranking', set_ranking_race_path(race), class: 'btn btn-primary' %>
+            <% end %>
+
+
+            <!-- Medal Display for Winners -->
+            <div class="row justify-content-center my-4">
+              <% race.lanes.where.not(ranking: 0).order(:ranking).limit(3).each_with_index do |lane, rank_index| %>
+                <div class="col-md-4 text-center mb-4">
+                  <div class="medal-container">
+                    <!-- Check rank and set medal accordingly -->
+                    <div class="medal <%= 'medal-1' if lane.ranking == 1 %><%= 'medal-2' if lane.ranking == 2 %><%= 'medal-3' if lane.ranking == 3 %>">
+                      <p class="medal-text"><%= lane.ranking %></p>
+                    </div>
+                    <h5><%= lane.student.name %></h5>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

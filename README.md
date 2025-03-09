@@ -1,24 +1,52 @@
-# README
+# Smey Assignment - School Race Day
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project Overview
 
-Things you may want to cover:
+This is a web application for managing and tracking race day events for a school race. It allows the creation of races, assignment of students to lanes, and management of rankings.
 
-* Ruby version
+## Requirements
 
-* System dependencies
+- **Ruby version**: 3.1.2p20
+- **Rails version**: 7.2.2.1
 
-* Configuration
+## Setup
 
-* Database creation
+### If you're **not using Docker**
 
-* Database initialization
+1. **Install the required Ruby gems:**
 
-* How to run the test suite
+   ```bash
+   bundle install
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+2. **Set up the database:**
 
-* Deployment instructions
+   ```bash
+   rails db:create
+   rails db:migrate
+   rails db:seed
+   ```
 
-* ...
+3. **Start the Rails server:**
+
+    ```bash
+   rails s
+   ```
+
+   The application will be available at: http://localhost:3000/
+
+### If you're using Docker**
+
+1. **Build and start the application using Docker Compose:**
+
+    ```bash
+    docker-compose up --build
+    ```
+
+    This will build the Docker images and start the application. The application will be available at: http://localhost:3000/
+
+### Running test
+
+    ```bash
+    bundle exec rspec
+    ```
