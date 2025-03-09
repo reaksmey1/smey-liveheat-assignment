@@ -1,0 +1,20 @@
+<div class="container my-4">
+  <div class="text-right mb-3">
+    <%= link_to 'Create New Race', new_race_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="row">
+    <% @races.each_with_index do |race, index| %>
+      <div class="col-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Race <%= index + 1 %>: <%= race.name %></h5>
+            <p class="card-text"><strong>Number of Lanes:</strong> <%= race.number_of_lanes %></p>
+
+            <%= link_to 'View Race', race_path(race), class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
