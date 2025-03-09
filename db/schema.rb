@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_09_043050) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_09_045335) do
   create_table "lanes", force: :cascade do |t|
     t.integer "race_id", null: false
     t.integer "student_id", null: false
     t.integer "lane_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ranking"
     t.index ["race_id"], name: "index_lanes_on_race_id"
     t.index ["student_id"], name: "index_lanes_on_student_id"
   end

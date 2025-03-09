@@ -16,5 +16,9 @@ Rails.application.routes.draw do
 
   resources :races do
     resources :lanes, only: [:create]
+    member do
+      get :set_ranking
+      patch :update_ranking
+    end
   end
 end

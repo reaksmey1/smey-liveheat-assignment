@@ -1,0 +1,29 @@
+<div class="container">
+  <h1><%= @race.name %> - Ranking</h1>
+
+  <%= form_with url: update_ranking_race_path(@race), method: :patch, local: true do |form| %>
+    <div class="row">
+      <% @race.lanes.each do |lane| %>
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Lane <%= lane.lane_number %>: <%= lane.student.name %></h5>
+              
+              <div class="form-group">
+                <%= form.label :ranking, "Final Place" %>
+                <%= form.number_field :"ranking_#{lane.id}", value: lane.ranking, min: 1, max: @race.number_of_lanes, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "Update Ranking", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  <div class="container my-4">
+    <%= link_to 'Back to Race', root_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

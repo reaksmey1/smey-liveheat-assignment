@@ -59,4 +59,61 @@ RSpec.describe RacesController, type: :controller do
       expect(assigns(:race)).to eq(race)
     end
   end
+
+  describe 'GET #set_ranking' do
+    it 'assigns the correct race to @race' do
+      get :set_ranking, params: { id: race.id }
+      expect(assigns(:race)).to eq(race)
+    end
+  end
+
+  describe 'GET #set_ranking' do
+    it 'assigns the correct race to @race' do
+      get :set_ranking, params: { id: race.id }
+      expect(assigns(:race)).to eq(race)
+    end
+  end
+
+  describe 'POST #update_ranking' do
+    context 'when rankings are valid' do
+      let(:valid_ranking_params) do
+        {
+          "ranking_#{lane_1.id}" => 1,
+          "ranking_#{lane_2.id}" => 2
+        }
+      end
+
+      it 'calls the UpdateRankingService and redirects with success message' do
+        service = instance_double(UpdateRankingService)
+        allow(UpdateRankingService).to receive(:new).and_return(service)
+        allow(service).to receive(:call).and_return({ success: true, message: 'Rankings updated successfully' })
+
+        post :update_ranking, params: { id: race.id, **valid_ranking_params }
+
+        expect(response).to redirect_to(set_ranking_race_path(race))
+        expect(flash[:notice]).to eq('Rankings updated successfully')
+      end
+    end
+
+    context 'when rankings are invalid' do
+      let(:invalid_ranking_params) do
+        {
+          "ranking_#{lane_1.id}" => 1,
+          "ranking_#{lane_2.id}" => 3,
+          "ranking_#{lane_2.id}" => 2
+        }
+      end
+
+      it 'returns an error message and redirects with alert' do
+        service = instance_double(UpdateRankingService)
+        allow(UpdateRankingService).to receive(:new).and_return(service)
+        allow(service).to receive(:call).and_return({ success: false, message: 'Invalid ranking sequence. Please fix the gaps or ties.' })
+
+        post :update_ranking, params: { id: race.id, **invalid_ranking_params }
+
+        expect(response).to redirect_to(set_ranking_race_path(race))
+        expect(flash[:alert]).to eq('Invalid ranking sequence. Please fix the gaps or ties.')
+      end
+    end
+  end
 end

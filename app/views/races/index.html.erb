@@ -12,6 +12,7 @@
             <p class="card-text"><strong>Number of Lanes:</strong> <%= race.number_of_lanes %></p>
 
             <%= link_to 'Assign Student', race_path(race), class: 'btn btn-info' %>
+            <%= link_to 'Set Ranking', set_ranking_race_path(race), class: 'btn btn-info' %>
           </div>
         </div>
       </div>
