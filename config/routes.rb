@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   root "races#index"
 
-  resources :races
+  resources :races do
+    resources :lanes, only: [:create]
+  end
 end

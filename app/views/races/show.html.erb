@@ -1,6 +1,40 @@
+<h1 class="my-4 text-center"><%= @race.name %> - Assign Student</h1>
+
 <div class="container">
-    <h1 class="my-4 text-center"><%= @race.name %></h1>
     <div class="my-3">
         <%= link_to 'Back to Races', races_path, class: 'btn btn-secondary' %>
     </div>
+  <!-- Form to assign student to lane -->
+  <div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Assign Student to Lane</h5>
+    </div>
+    <div class="card-body">
+        <%= form_with model: Lane.new, url: race_lanes_path(@race), local: false do |form| %>
+            <div class="form-group">
+            <%= form.label :student_id, "Select Student" %>
+            <%= form.collection_select :student_id, Student.all, :id, :name, { prompt: "Select a student" }, class: "form-control" %>
+            </div>
+        
+            <div class="form-group">
+            <%= form.label :lane_number, "Lane Number" %>
+            <%= form.number_field :lane_number, min: 1, max: @race.number_of_lanes, class: "form-control" %>
+            </div>
+        
+            <div class="form-group">
+            <%= form.submit "Assign Student to Lane", class: "btn btn-primary" %>
+            </div>
+        <% end %>
+    </div>
+  </div>
+
+  <!-- List of assigned lanes -->
+  <h2 class="my-4">Assigned Lanes:</h2>
+  <ul class="list-group">
+    <% @race.lanes.each do |lane| %>
+      <li class="list-group-item">
+        <strong>Lane <%= lane.lane_number %>:</strong> <%= lane.student.name %>
+      </li>
+    <% end %>
+  </ul>
 </div>

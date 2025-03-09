@@ -89,6 +89,7 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
+    byebug (11.1.3)
     capybara (3.40.0)
       addressable
       matrix
@@ -342,6 +343,7 @@ DEPENDENCIES
   bootsnap
   bootstrap
   brakeman
+  byebug
   capybara
   debug
   error_highlight (>= 0.4.0)

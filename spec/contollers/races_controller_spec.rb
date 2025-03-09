@@ -1,3 +1,4 @@
+# spec/controllers/races_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe RacesController, type: :controller do
@@ -10,6 +11,8 @@ RSpec.describe RacesController, type: :controller do
   }
 
   let(:race) { Race.create(valid_attributes) }
+  let(:lane_1) { Lane.create(race: race, student: Student.create(name: 'Student 1')) }
+  let(:lane_2) { Lane.create(race: race, student: Student.create(name: 'Student 2')) }
 
   describe 'GET #index' do
     it 'returns a successful response' do
@@ -44,7 +47,7 @@ RSpec.describe RacesController, type: :controller do
           post :create, params: { race: invalid_attributes }
         }.to change(Race, :count).by(0)
 
-        expect(response).to render_template(:new)
+        expect(response).to redirect_to(:new_race)
       end
     end
   end
