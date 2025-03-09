@@ -5,7 +5,6 @@ class AssignLaneService
     end
   
     def call
-      byebug
       # Check if the student is already assigned to another lane in the same race
       if student_already_assigned?
         return { success: false, message: "This student is already assigned to a lane in this race." }
