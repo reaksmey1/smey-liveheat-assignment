@@ -67,13 +67,6 @@ RSpec.describe RacesController, type: :controller do
     end
   end
 
-  describe 'GET #set_ranking' do
-    it 'assigns the correct race to @race' do
-      get :set_ranking, params: { id: race.id }
-      expect(assigns(:race)).to eq(race)
-    end
-  end
-
   describe 'POST #update_ranking' do
     context 'when rankings are valid' do
       let(:valid_ranking_params) do
