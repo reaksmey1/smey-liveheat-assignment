@@ -47,6 +47,4 @@ This is a web application for managing and tracking race day events for a school
 
 ### Running test
 
-    ```bash
     bundle exec rspec
-    ```
